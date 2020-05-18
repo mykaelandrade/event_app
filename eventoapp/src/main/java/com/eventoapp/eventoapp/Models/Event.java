@@ -1,6 +1,7 @@
 package com.eventoapp.eventoapp.Models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.List;
 
@@ -22,9 +23,16 @@ public class Event implements Serializable {
         this.code = code;
     }
 
+    @NotEmpty
     private String name;
+
+    @NotEmpty
     private String local;
+
+    @NotEmpty
     private String date;
+
+    @NotEmpty
     private String time;
 
     @OneToMany

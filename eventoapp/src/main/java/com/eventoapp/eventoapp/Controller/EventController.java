@@ -6,10 +6,14 @@ import com.eventoapp.eventoapp.Repository.EventRepository;
 import com.eventoapp.eventoapp.Repository.GuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 @Controller
 public class EventController {
@@ -26,10 +30,13 @@ public class EventController {
     }
 
     @RequestMapping(value = "/registerEvent", method = RequestMethod.POST)
-    private String form(Event event) {
-
+    private String form(@Valid Event event, BindingResult result, RedirectAttributes attributes) {
+        if (result.hasErrors()) {
+            attributes.addFlashAttribute("message", "Preencha os campos para cadastrar!");
+            return "redirect:/registerEvent";
+        }
         eventRepository.save(event);
-
+        attributes.addFlashAttribute("message", "Evento cadastrado com sucesso!");
         return "redirect:/registerEvent";
     }
 
@@ -55,10 +62,15 @@ public class EventController {
     }
 
     @RequestMapping(value = "/{code}", method = RequestMethod.POST)
-    public String detailEvent(@PathVariable("code") long code, Guest guest) {
+    public String detailEvent(@PathVariable("code") long code, @Valid Guest guest, BindingResult result, RedirectAttributes attributes) {
+        if (result.hasErrors()) {
+            attributes.addFlashAttribute("message", "Preencha os campos para cadastrar!");
+            return "redirect:/{code}";
+        }
         Event event = eventRepository.findByCode(code);
         guest.setEvent(event);
         guestRepository.save(guest);
+        attributes.addFlashAttribute("mensage", "Convidado cadastrado com sucesso!");
         return "redirect:/{code}";
     }
 }

@@ -28,6 +28,7 @@
     <form method="post">
         Nome: <input type="text" value="" name="nameGuest">
         Rg: <input type="text" value="" name="rg">
+        <th:block th:include="messageValidate"></th:block>
         <button type="submit" class="waves-effect waves-light btn">Adicionar</button>
     </form>
 </div>
