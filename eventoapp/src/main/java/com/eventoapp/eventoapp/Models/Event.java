@@ -9,6 +9,9 @@ import java.util.List;
 @Table(name = "Event")
 public class Event implements Serializable {
 
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Guest> guests;
+
     private static final long serialVersionUID = 1L;
 
     @Id

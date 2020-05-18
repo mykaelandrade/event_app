@@ -57,12 +57,15 @@
     <tr>
         <th>Nome Convidado</th>
         <th>RG</th>
+        <th>Deletar</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="guest : ${guests}">
         <td><span th:text="${guest.nameGuest}"></span></td>
         <td><span th:text="${guest.rg}"></span></td>
+        <td><a th:href="@{/deleteGuest(rg=${guest.rg})}"><i
+                class="material-icons right">delete</i></a></td>
     </tr>
     </tbody>
 </table>
