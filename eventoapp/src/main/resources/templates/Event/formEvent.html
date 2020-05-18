@@ -10,11 +10,21 @@
 </head>
 
 <body>
+
+<header>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo"> Cadastro de Eventos</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/events" class="waves-effect waves-light btn"><i class="material-icons right">format_align_justify</i>Listas
+                    de
+                    Eventos</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<br>
 <div class="container">
-    <h1>Cadastro de Eventos:</h1>
-    <h3><a href="/events" class="waves-effect waves-light btn"><i class="material-icons right">format_align_justify</i>Listas
-        de
-        Eventos</a></h3>
     <th:block th:include="messageValidate"></th:block>
 </div>
 
@@ -28,7 +38,7 @@
             Data: <input type="date" value="" name="date"/>
         </div>
         <div class="input-field col s3">
-            Horario: <input type="text" value="" name="time"/>
+            Horario: <input type="time" value="" name="time"/>
         </div>
     </div>
 
